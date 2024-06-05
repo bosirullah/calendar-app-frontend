@@ -23,7 +23,7 @@ import SignInButton from "../buttons/SignInButton";
 const pages = ["Create"];
 const settings = ["Logout"];
 
-const WEB_URL = process.env.WEB_URL;
+const SERVER_URL = process.env.SERVER_URL;
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -60,7 +60,7 @@ function Header() {
             const { code } = tokenResponse;
             try {
                 const tokenRes = await axios.post(
-                    `${WEB_URL}/auth/create-tokens`,
+                    `${SERVER_URL}/auth/create-tokens`,
                     { code }
                 );
 
