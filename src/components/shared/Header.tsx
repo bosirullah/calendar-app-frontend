@@ -1,5 +1,5 @@
 "use client";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,6 +19,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import SignInButton from "../buttons/SignInButton";
+import Cookies from "js-cookie";
 
 const pages = ["Create"];
 const settings = ["Logout"];
@@ -64,9 +65,13 @@ function Header() {
                     { code }
                 );
 
-                const { access_token, refresh_token } = tokenRes.data;
-                setAccessToken(access_token);
+                const { jwtToken, tokens } = tokenRes.data;
+                const { access_token, refresh_token } = tokens;
                 setRefreshToken(refresh_token);
+                setAccessToken(access_token);
+
+                localStorage.setItem("jwtToken", jwtToken);
+
                 setIsAuthenticated(true);
 
                 const userInfoResponse = await axios.get(
@@ -81,6 +86,14 @@ function Header() {
         flow: "auth-code",
         scope: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
     });
+
+    useEffect(() => {
+        const jwtToken = localStorage.getItem("jwtToken");
+        if (jwtToken) {
+            setIsAuthenticated(true);
+            // Optionally, fetch user info with the JWT token here
+        }
+    }, []);
 
     // Logout
     const router = useRouter();
