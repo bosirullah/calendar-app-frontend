@@ -9,6 +9,8 @@ import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
+const WEB_URL = process.env.WEB_URL;
+
 const CalenderView = () => {
     const [events, setEvents] = useState<any>([]);
     const { accessToken, isAuthenticated, setIsAuthenticated } = useAuth();
@@ -19,7 +21,7 @@ const CalenderView = () => {
             try {
                 if (isAuthenticated) {
                     const response = await axios.get(
-                        "http://localhost:5000/events/getEvents",
+                        `${WEB_URL}/events/getEvents`,
                         {
                             headers: {
                                 Authorization: `Bearer ${accessToken}`,

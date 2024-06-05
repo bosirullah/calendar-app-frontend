@@ -23,6 +23,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 
+const WEB_URL = process.env.WEB_URL;
+
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -84,7 +86,7 @@ const CreateEvent = () => {
 
     // try {
     //     const response = await axios.post(
-    //         "http://localhost:5000/events/create-event",
+    //         `${WEB_URL}/events/create-event`,
     //         {
     //             title,
     //             description,
@@ -117,7 +119,7 @@ const CreateEvent = () => {
         // POST Api Call
         try {
             const response = await axios.post(
-                "http://localhost:5000/events/create-event",
+                `${WEB_URL}/events/create-event`,
                 {
                     eventTitle: "bosir",
                     description: "yooooo",
