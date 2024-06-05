@@ -23,6 +23,8 @@ import SignInButton from "../buttons/SignInButton";
 const pages = ["Create"];
 const settings = ["Logout"];
 
+const WEB_URL = process.env.WEB_URL;
+
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -42,7 +44,6 @@ function Header() {
         setAnchorElUser(null);
     };
 
-    // Login
     const {
         user,
         login,
@@ -53,31 +54,13 @@ function Header() {
         setIsAuthenticated,
     } = useAuth();
 
-    // const login = useGoogleLogin({
-    //     onSuccess: async (tokenResponse) => {
-    //         const { code } = tokenResponse;
-    //         try {
-    //             const response = await axios.post(
-    //                 "http://localhost:5000/auth/create-tokens",
-    //                 { code }
-    //             );
-    //             console.log("res = ", response.data);
-    //             // console.log("ref_token = ", response.data.refresh_token);
-    //             setIsSignedIn(true);
-    //             setRefreshToken(response.data.refresh_token);
-    //         } catch (error) {
-    //             console.log("Error:", error);
-    //         }
-    //     },
-    //     flow: "auth-code",
-    // });
-
+    // Login
     const handleGoogleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             const { code } = tokenResponse;
             try {
                 const tokenRes = await axios.post(
-                    "http://localhost:5000/auth/create-tokens",
+                    `${WEB_URL}/auth/create-tokens`,
                     { code }
                 );
 
