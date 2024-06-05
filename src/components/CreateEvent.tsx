@@ -23,7 +23,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 
-const SERVER_URL = process.env.SERVER_URL;
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {

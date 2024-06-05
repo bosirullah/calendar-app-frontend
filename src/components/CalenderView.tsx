@@ -9,7 +9,7 @@ import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-const SERVER_URL = process.env.SERVER_URL;
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const CalenderView = () => {
     const [events, setEvents] = useState<any>([]);

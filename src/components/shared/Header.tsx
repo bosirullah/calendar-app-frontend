@@ -23,7 +23,7 @@ import SignInButton from "../buttons/SignInButton";
 const pages = ["Create"];
 const settings = ["Logout"];
 
-const SERVER_URL = process.env.SERVER_URL;
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
